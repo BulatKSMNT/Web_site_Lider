@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIDER - Надёжный партнёр</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;700&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="{% static 'core/img/Lider_logo_color_gor.svg'%}" alt="LIDER Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#catalog">Каталог</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#work">Порядок работы</a></li>
+                    <li><a href="#reviews">Отзывы</a></li>
+                    <li><a href="#contact">Связаться</a></li>
+                </ul>
+            </nav>
+            <div class="contact-info">
+                <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+                <a href="mailto:info@zsplider.ru">info@zsplider.ru</a>
+            </div>
+            <div class="burger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#catalog">Каталог</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#work">Порядок работы</a></li>
+                    <li><a href="#reviews">Отзывы</a></li>
+                    <li><a href="#contact">Связаться</a></li>
+                </ul>
+            </nav>
+            <div class="logo">
+                <img src="{% static 'core/img/Lider_logo_wight_vert.svg'%}" alt="LIDER Logo">
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'core/js/script.js' %}"></script>
+</body>
+</html>
