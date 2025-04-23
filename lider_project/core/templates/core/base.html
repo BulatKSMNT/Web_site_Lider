@@ -12,7 +12,7 @@
     <header>
         <div class="container">
             <div class="logo">
-                <img src="{% static 'core/img/Lider_logo_color_gor.svg'%}" alt="LIDER Logo">
+                <a href="#hero"><img src="{% static 'core/img/Lider_logo_color_gor.svg'%}" alt="LIDER Logo"></a>
             </div>
             <nav>
                 <ul>
@@ -29,16 +29,14 @@
                 <a href="mailto:info@zsplider.ru">info@zsplider.ru</a>
             </div>
             <div class="burger-menu">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span class="span1"></span>
+                <span class="span2"></span>
+                <span class="span3"></span>
             </div>
         </div>
     </header>
-
     {% block content %}
     {% endblock %}
-
     <footer>
         <div class="container">
             <nav>
