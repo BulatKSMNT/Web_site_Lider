@@ -1,0 +1,305 @@
+
+/* Стили для поисковой строки */
+.search-bar-container {
+    background-color: #fff; /* Серый фон, как на Картинке 2 */
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+
+.search-input-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 500px; /* Ограничение ширины поисковой строки */
+    flex-grow: 1;
+}
+
+.search-input-wrapper input {
+    width: 100%;
+    padding: 10px 40px 10px 15px;
+    border: 1px solid #ddd; /* Серая рамка */
+    border-radius: 20px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.search-input-wrapper .search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+.contact-us-btn {
+    background-color: #28a745; /* Зелёный фон */
+    color: #fff; /* Белый текст */
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+.contact-us-btn:hover {
+    background-color: #218838; /* Тёмный зелёный при наведении */
+}
+
+/*
+.search-input-wrapper input {
+    width: 100%;
+    padding: 10px 40px 10px 15px;
+    border: 1px solid #ddd; /* Серая рамка
+    border-radius: 20px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+*/
+
+
+/* Стили для "условного" пути (breadcrumb) */
+/* Breadcrumb Styles */
+.breadcrumb {
+    background-color: #fff; /* Белый фон */
+    padding: 10px 0;
+    font-size: 14px;
+    color: #666; /* Серый цвет текста */
+}
+
+.breadcrumb .container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.breadcrumb a {
+    color: #28a745; /* Зелёный цвет ссылок */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb a:hover {
+    color: #218838; /* Тёмный зелёный при наведении */
+}
+
+.breadcrumb span {
+    color: #666; /* Серый цвет разделителя */
+}
+
+
+/* Catalog List Section */
+.catalog-list {
+    background-color: #f9f9f9;
+    padding: 25px 0; /* Универсальный отступ */
+    box-sizing: border-box;
+}
+
+.catalog-list .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px; /* Убираем 50px, так как padding уже есть в section */
+}
+
+.catalog-list h2 {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.catalog-description {
+    font-size: 16px;
+    font-weight: 400;
+    color: #666;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    text-align: center;
+}
+
+.catalog-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.catalog-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.catalog-item img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+    object-fit: contain;
+}
+
+.catalog-item h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.catalog-item .arrow-btn {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    font-size: 24px;
+    color: #28a745;
+    transition: color 0.3s ease;
+}
+
+.catalog-item .arrow-btn:hover {
+    color: #218838;
+}
+
+/* Media Queries for Responsive Design */
+
+/* Mobile Devices (≤576px) */
+@media (max-width: 576px) {
+    .search-bar {
+        flex-direction: column; /* Вертикальное расположение на мобильных */
+        gap: 10px;
+    }
+
+    .search-input-wrapper {
+        max-width: 100%; /* Поле ввода занимает всю ширину */
+        min-width: unset;
+    }
+
+    .catalog-list {
+        padding: 30px 0; /* Уменьшенный отступ */
+    }
+
+    .catalog-list h2 {
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+
+    .catalog-description {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+
+    .catalog-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .catalog-item {
+        padding: 15px;
+    }
+
+    .catalog-item img {
+        max-width: 150px;
+        margin-bottom: 15px;
+    }
+
+    .catalog-item h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .catalog-item .arrow-btn {
+        font-size: 20px;
+        right: 15px;
+        bottom: 15px;
+    }
+}
+
+/* Tablets (577px–768px) */
+@media (min-width: 577px) and (max-width: 768px) {
+    .search-bar {
+        flex-wrap: wrap; /* Разрешаем перенос элементов */
+        gap: 10px;
+    }
+
+    .search-input-wrapper {
+        max-width: 400px;
+    }
+
+    .catalog-list {
+        padding: 35px 0;
+    }
+
+    .catalog-list h2 {
+        font-size: 32px;
+    }
+
+    .catalog-description {
+        font-size: 15px;
+    }
+
+    .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
+    .catalog-item img {
+        max-width: 180px;
+    }
+
+    .catalog-item h3 {
+        font-size: 19px;
+    }
+}
+
+/* Small Desktops (769px–992px) */
+@media (min-width: 769px) and (max-width: 992px) {
+    .search-input-wrapper {
+        max-width: 400px;
+    }
+
+    .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
+    .catalog-item img {
+        max-width: 180px;
+    }
+}
+
+/* Medium Desktops (993px–1200px) */
+@media (min-width: 993px) and (max-width: 1200px) {
+    .search-input-wrapper {
+        max-width: 500px;
+    }
+
+    .catalog-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .catalog-item {
+        padding: 15px;
+    }
+
+    .catalog-item img {
+        max-width: 180px;
+    }
+}

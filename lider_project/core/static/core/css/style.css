@@ -13,8 +13,8 @@ a {
 
 .container {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
+    margin: 10px auto;
+    padding: 5px 15px;
     box-sizing: border-box;
 }
 
@@ -32,7 +32,7 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 7.5px;
+    padding: 10px 7.5px;
 }
 
 header .logo img {
@@ -118,6 +118,11 @@ header .burger-menu.active span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -7px);
 }
 
+/* Устанавливаем отступ для main, чтобы контент начинался ниже header */
+main {
+    padding-top: 80px; /* Высота header на десктопах (примерно 60-80px) */
+}
+
 /* Hero Styles */
 .hero {
     height: 100vh;
@@ -128,7 +133,9 @@ header .burger-menu.active span:nth-child(3) {
     color: #fff;
     padding: 0 20px;
     position: relative;
-    margin-top: 0; /* Убрано, так как JavaScript учитывает хедер */
+    margin-top: 0;
+    background-size: cover; /* Добавляем, чтобы фоновое изображение корректно отображалось */
+    background-position: center;
 }
 
 .hero::before {
@@ -174,7 +181,7 @@ header .burger-menu.active span:nth-child(3) {
 
 /* Section Styles */
 section {
-    padding: 30px 0; /* Уменьшено до минимального значения */
+    padding: 60px 0; /* Универсальный отступ для всех секций */
     box-sizing: border-box;
 }
 
@@ -183,7 +190,7 @@ section h2 {
     font-size: 36px;
     font-weight: 700;
     text-align: center;
-    margin-bottom: 20px; /* Уменьшено с 30px */
+    margin-bottom: 20px;
 }
 
 /* About Section */
@@ -378,7 +385,6 @@ section h2 {
 .step-icon {
     width: 60px;
     height: 60px;
-
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -390,7 +396,6 @@ section h2 {
 .step-icon img {
     width: 60px;
     height: 60px;
-
 }
 
 .step h3 {
@@ -512,7 +517,7 @@ section h2 {
 /* Contact Section */
 #contact {
     background-color: #f9f9f9;
-    padding: 10px 0; /* Минимальный padding */
+    padding: 40px 0; /* Универсальный отступ */
 }
 
 #contact .contact-container {
@@ -699,6 +704,11 @@ footer .logo img {
         display: flex;
     }
 
+    /* Уменьшаем отступ для main на мобильных устройствах */
+    main {
+        padding-top: 60px; /* Высота header на мобильных (примерно 50-60px) */
+    }
+
     /* Hero */
     .hero {
         height: 70vh;
@@ -722,7 +732,7 @@ footer .logo img {
 
     /* Sections */
     section {
-        padding: 8px 0;
+        padding: 30px 0; /* Уменьшенный отступ для мобильных */
     }
 
     section h2 {
@@ -853,7 +863,7 @@ footer .logo img {
 
     /* Contact */
     #contact {
-        padding: 8px 0;
+        padding: 30px 0;
     }
 
     #contact .contact-container {
@@ -895,16 +905,51 @@ footer .logo img {
 /* Tablets (577px–768px) */
 @media (min-width: 577px) and (max-width: 768px) {
     /* Header */
+    header .container {
+        padding: 10px 7.5px;
+    }
+
+    header nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(48, 48, 48, 0.9);
+        padding: 20px 0;
+        z-index: 999;
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    header nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
     header nav ul {
-        gap: 20px;
+        flex-direction: column; /* Элементы меню в столбец */
+        gap: 25px; /* Увеличиваем расстояние между пунктами меню */
+        align-items: center;
     }
 
     header nav ul li a {
-        font-size: 14px;
+        font-size: 18px; /* Увеличиваем размер шрифта для лучшей читаемости */
     }
 
     header .contact-info {
-        font-size: 12px;
+        display: none; /* Скрываем контактную информацию на планшетах */
+    }
+
+    header .burger-menu {
+        display: flex; /* Показываем бургер-меню на планшетах */
+    }
+
+    /* Отступ для main на планшетах */
+    main {
+        padding-top: 70px; /* Высота header на планшетах (примерно 70px) */
     }
 
     /* Hero */
@@ -918,7 +963,7 @@ footer .logo img {
 
     /* Sections */
     section {
-        padding: 9px 0;
+        padding: 35px 0;
     }
 
     /* About */
@@ -1014,6 +1059,11 @@ footer .logo img {
 
     header .contact-info {
         display: none;
+    }
+
+    /* Отступ для main на малых десктопах */
+    main {
+        padding-top: 70px; /* Высота header (примерно 70px) */
     }
 
     /* Hero */
