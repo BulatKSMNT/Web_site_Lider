@@ -1,4 +1,23 @@
-from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
 
-def index(request):
-    return render(request, 'core/index.html')
+from core.forms import RequestForm
+from core.models import Request
+
+def user_request(request):
+    is_success = False
+    if request.method == 'POST':
+        form = RequestForm(data = request.POST)
+        if form.is_valid():
+            Request.objects.create(
+                fullname=form.cleaned_data['fullname'],
+                phone_number=form.cleaned_data['phone_number'],
+                email=form.cleaned_data['email'],
+                description=form.cleaned_data['description']
+            )
+            messages.success(request, "Заявка успешно отправлена! Мы свяжемся с вами.")
+            return redirect("/#contact")
+    else:
+        form = RequestForm()
+
+    return render(request, 'core/index.html', {'form': form})
