@@ -12,7 +12,7 @@
 {% block content %}
     <div class="search-bar-container">
         <div class="search-input-wrapper">
-            <input type="text" placeholder="Поиск по каталогу">
+            <input type="text" placeholder="Поиск по сайту">
             <!-- <img src="" alt="Search Icon" class="search-icon"> -->
         </div>
         <button class="contact-us-btn">Связаться с нами</button>
@@ -23,18 +23,23 @@
             <a href="/">Главная</a>
             <span> / </span>
             <a href="/catalog">Каталог</a>
+            <span> / </span>
+            <a href="/catalog/category" >Название категории</a>
+            <!-- Пример добавления нового уровня -->
+            <!-- <span> / </span> -->
+            <!-- <a href="/catalog/subcategory">Подкатегория</a> -->
         </div>
     </div>
 
     <section id="catalog" class="catalog-list">
         <div class="container">
-            <h2>Категории товаров</h2>
-            <p class="catalog-description">Мы создаём изделия, которые соответствуют в себе высокое качество, надёжность и инновационные требования.</p>
+            <h2>Название категории</h2>
+            <p class="catalog-description">Идеальное решение для стен и кровли от 2 м²с отличными теплоизоляционными свойствами</p>
             <div class="catalog-grid">
                 <div class="catalog-item">
                     <img src="{% static 'catalog/img/vodostochnye-sistemy.png' %}" alt="Водосточные системы">
-                    <h3>Водосточные системы</h3>
-                    <a href="{% url 'category' %}" class="arrow-btn">→</a>
+                    <h3>Водосточные система KNAUF 30</h3>
+                    <a href="/catalog/category/product" class="arrow-btn">→</a>
                 </div>
                 <!-- Остальные элементы -->
             </div>
