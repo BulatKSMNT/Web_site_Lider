@@ -185,11 +185,34 @@
                 <div class="contact-form" id="contact-form">
                     <h2>Оставьте заявку, и мы поможем рассчитать стоимость вашего проекта</h2>
                     <p>Оставьте свои контактные данные, наш менеджер свяжется с вами для расчета стоимости вашего проекта</p>
-                    <form>
-                        <input type="text" placeholder="Ваше имя" required>
-                        <input type="email" placeholder="Ваш email" required>
-                        <input type="tel" placeholder="Ваш телефон" required>
-                        <textarea placeholder="Ваше сообщение" required></textarea>
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="fullname" placeholder="Ваше ФИО" value="{{ form.fullname.value|default_if_none:'' }}" required>
+                        <input type="email" name="email" placeholder="Ваш email (post@example.ru)" value="{{ form.email.value|default_if_none:'' }}" required>
+                        <input type="tel" name="phone_number" placeholder="Ваш телефон" value="{{ form.phone_number.value|default_if_none:'' }}" required>
+                        <textarea name="description" placeholder="Ваше сообщение">{{ form.description.value|default_if_none:'' }}</textarea>
+
+                        {% if form.errors %}
+                            <div class="form-errors" style="color: red;">
+                                <ul>
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
                         <button type="submit">Отправить</button>
                     </form>
                 </div>
