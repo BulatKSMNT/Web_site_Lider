@@ -31,12 +31,28 @@
             <h2>Категории товаров</h2>
             <p class="catalog-description">Мы создаём изделия, которые соответствуют в себе высокое качество, надёжность и инновационные требования.</p>
             <div class="catalog-grid">
-                <div class="catalog-item">
-                    <img src="{% static 'catalog/img/vodostochnye-sistemy.png' %}" alt="Водосточные системы">
-                    <h3>Водосточные системы</h3>
-                    <a href="{% url 'category' %}" class="arrow-btn">→</a>
+            {% for category in categories %}
+                <a href="{% url 'product_list' category.id %}" class="catalog-item-link">
+                    <div class="catalog-item">
+                        <div class="catalog-item-img-container">
+                            <img src="{{ category.image_url }}"
+                                 alt="{{ category.category_name }}"
+                                 class="catalog-item-img"
+                                 loading="lazy">
+                        </div>
+                        <div class="catalog-item-content">
+                            <h3 class="catalog-item-title">{{ category.category_name }}</h3>
+                            <p class="catalog-item-desc">
+                                {{ category.description|truncatechars:100 }}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            {% empty %}
+                <div class="catalog-empty">
+                    <p>Категории временно отсутствуют</p>
                 </div>
-                <!-- Остальные элементы -->
+            {% endfor %}
             </div>
         </div>
     </section>

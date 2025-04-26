@@ -53,7 +53,7 @@ class AttributeValue(models.Model):
 
 
 class ProductImages(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Продукт")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Продукт", related_name='images')
     image_url = models.URLField(verbose_name="Изображение")
     alternative_text = models.CharField(max_length=255, verbose_name="Альтернативный текст")
 

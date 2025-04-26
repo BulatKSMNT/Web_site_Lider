@@ -1,0 +1,76 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}?v=1.0">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'catalog/js/catalog.js' %}?v=1.0"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="search-bar-container">
+        <div class="search-input-wrapper">
+            <input type="text" placeholder="Поиск по товарам">
+            <!-- <img src="" alt="Search Icon" class="search-icon"> -->
+        </div>
+        <button class="contact-us-btn">Связаться с нами</button>
+    </div>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="/">Главная</a>
+            <span> / </span>
+            <a href="/catalog">Каталог</a>
+            <span> / </span>
+            <a href="/catalog/category/{{ category.id }}" >{{ category.category_name }}</a>
+            <!-- Пример добавления нового уровня -->
+            <!-- <span> / </span> -->
+            <!-- <a href="/catalog/subcategory">Подкатегория</a> -->
+        </div>
+    </div>
+
+    <section id="catalog" class="catalog-list">
+        <div class="container">
+            <h2>{{ category.category_name }}</h2>
+            <p class="catalog-description">{{ category.description }}</p>
+            <div class="catalog-grid">
+                {% for product in products %}
+                    <a href="{% url 'product_detail' category.id product.id %}" class="catalog-item-link">
+                    <div class="catalog-item">
+                        {% if product.images.all %}
+                            <div id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    {% for image in product.images.all %}
+                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                            <img src="{{ image.image_url }}" class="d-block w-100" alt="{{ image.alternative_text }}">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                {% if product.images.count > 1 %}
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        <h3>{{ product.product_name }}</h3>
+                        <h5>От {{ product.cost }} ₽ / м²</h5>
+                    </div>
+                    </a>
+                {% empty %}
+                    <div class="catalog-empty">
+                        <h3>Товары временно отсутствуют</h3>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

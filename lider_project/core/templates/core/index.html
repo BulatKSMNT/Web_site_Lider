@@ -25,42 +25,38 @@
 
     <section id="catalog" class="catalog">
         <div class="container">
-            <h2>Каталог</h2>
+            <h2 class="catalog-title">Каталог</h2>
+
             <div class="catalog-grid">
-                <div class="catalog-item">
-                    <img src="https://zsplider.ru/static/images/product1.jpg" alt="Продукт 1">
-                    <h3>Продукт 1</h3>
-                    <p>Описание продукта 1, который поможет вашему бизнесу.</p>
-                </div>
-                <div class="catalog-item">
-                    <img src="https://zsplider.ru/static/images/product2.jpg" alt="Продукт 2">
-                    <h3>Продукт 2</h3>
-                    <p>Описание продукта 2 для вашего успеха.</p>
-                </div>
-                <div class="catalog-item">
-                    <img src="https://zsplider.ru/static/images/product3.jpg" alt="Продукт 3">
-                    <h3>Продукт 3</h3>
-                    <p>Описание продукта 3, созданного для роста.</p>
-                </div>
-                <div class="catalog-item">
-                    <img src="https://zsplider.ru/static/images/product4.jpg" alt="Продукт 4">
-                    <h3>Продукт 4</h3>
-                    <p>Описание продукта 4 для вашего бизнеса.</p>
-                </div>
-                <div class="catalog-item">
-                    <img src="https://zsplider.ru/static/images/product4.jpg" alt="Продукт 4">
-                    <h3>Продукт 4</h3>
-                    <p>Описание продукта 4 для вашего бизнеса.</p>
-                </div>
-                <div class="catalog-item">
-                    <img src="https://zsplider.ru/static/images/product4.jpg" alt="Продукт 4">
-                    <h3>Продукт 4</h3>
-                    <p>Описание продукта 4 для вашего бизнеса.</p>
-                </div>
+                {% for category in categories %}
+                    <a href="{% url 'product_list' category.id %}" class="catalog-item-link">
+                            <div class="catalog-item">
+                                <div class="catalog-item-img-container">
+                                    <img src="{{ category.image_url }}"
+                                         alt="{{ category.category_name }}"
+                                         class="catalog-item-img"
+                                         loading="lazy">
+                                </div>
+                                <div class="catalog-item-content">
+                                    <h3 class="catalog-item-title">{{ category.category_name }}</h3>
+                                    <p class="catalog-item-desc">
+                                        {{ category.description|truncatechars:100 }}
+                                    </p>
+                                </div>
+                            </div>
+                    </a>
+                {% empty %}
+                    <div class="catalog-empty">
+                        <p>Категории временно отсутствуют</p>
+                    </div>
+                {% endfor %}
             </div>
+
+            {% if categories|length >= 4 %}
             <div class="catalog-more">
-                <a href="{% url 'catalog_list' %}"><button class="catalog-more-btn">Другие товары</button></a>
+                <a href="{% url 'category_list' %}"><button class="catalog-more-btn">Другие категории</button></a>
             </div>
+            {% endif %}
         </div>
     </section>
 

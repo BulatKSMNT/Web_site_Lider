@@ -1,0 +1,99 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <div class="search-bar-container">
+        <div class="search-input-wrapper">
+            <input type="text" placeholder="Поиск по сайту">
+            <img src="" alt="Search Icon" class="search-icon">
+        </div>
+        <button class="contact-us-btn">Связаться с нами</button>
+    </div>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="/">Главная</a>
+            <span> / </span>
+            <a href="/catalog">Каталог</a>
+          <span> / </span>
+            <a href="/catalog/category/{{ category.id }}">{{category.category_name}}</a>
+            <span> / </span>
+            <a href="/catalog/category/{{ category.id }}/product/{{product.id}}">{{product.product_name}}</a>
+        </div>
+    </div>
+
+    <section id="product" class="product-details">
+        <div class="container">
+            <div class="product-content">
+                <div class="product-image">
+                    {% if product.images.all %}
+                        <div id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for image in product.images.all %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <img src="{{ image.image_url }}" class="d-block w-100" alt="{{ image.alternative_text }}">
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            {% if product.images.count > 1 %}
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="product-info">
+                    <h1>{{product.product_name}}</h1>
+                    <p>{{product.description}}</p>
+                    <div class="product-characteristics">
+                        <h3>Характеристики</h3>
+                        <ul>
+                        {% for attribute in attributes %}
+                            <li>
+                                <strong>{{ attribute.attribute_name }}:</strong>
+                                {% for attr_val in attribute_values %}
+                                    {% if attr_val.attribute.id == attribute.id %}
+                                        {{ attr_val.value }}
+                                    {% endif %}
+                                {% endfor %}
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="product-price">
+                        <div class="price-details">
+                            <p class="price">от {{product.cost}} ₽ / м²</p>
+                            <p class="discount">до 1000 ₽ / 90%</p>
+                        </div>
+                        <div class="product-actions">
+                            <button class="request-btn">Оставить заявку</button>
+                            <button class="call-btn">Позвонить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="related-products" class="related-products">
+        <div class="container">
+            <h2>Похожие товары</h2>
+            <div class="catalog-list">
+                {% for item in related_products %}
+                    <div class="catalog-item">
+                        <img src="" alt="Item title">
+                        <h3>ITEM TITLE</h3>
+                        <p>Краткое описание</p>
+                        <p class="item-price">от <!--{{ item.price }}--> ₽ / м²</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

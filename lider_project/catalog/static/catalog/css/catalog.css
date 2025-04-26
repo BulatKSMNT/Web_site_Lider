@@ -71,12 +71,14 @@
     padding: 10px 0;
     font-size: 14px;
     color: #666; /* Серый цвет текста */
+    margin-bottom: 0
 }
 
 .breadcrumb .container {
     display: flex;
     align-items: center;
     gap: 5px;
+
 }
 
 .breadcrumb a {
@@ -302,4 +304,11 @@
     .catalog-item img {
         max-width: 180px;
     }
+}
+
+.carousel-item img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
 }
