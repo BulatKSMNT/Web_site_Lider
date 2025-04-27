@@ -12,10 +12,12 @@
 {% block content %}
     <div class="search-bar-container">
         <div class="search-input-wrapper">
-            <input type="text" placeholder="Поиск по товарам">
-            <!-- <img src="" alt="Search Icon" class="search-icon"> -->
+            <form method="get" action="">
+                {{ check_form.category }}
+                <input type="text" name="search" placeholder="Поиск по товарам" value="{{ form.search.value|default_if_none:'' }}">
+                <button type="submit" class="contact-us-btn">Найти</button>
+            </form>
         </div>
-        <button class="contact-us-btn">Связаться с нами</button>
     </div>
 
     <div class="breadcrumb">

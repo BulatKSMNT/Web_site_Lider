@@ -12,10 +12,20 @@
 
 
 .search-input-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
     position: relative;
     width: 100%;
-    max-width: 500px; /* Ограничение ширины поисковой строки */
+    max-width: 500px;
     flex-grow: 1;
+}
+
+.search-input-wrapper form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
 }
 
 .search-input-wrapper input {
@@ -26,6 +36,7 @@
     font-size: 14px;
     box-sizing: border-box;
 }
+
 .search-input-wrapper .search-icon {
     position: absolute;
     right: 15px;
@@ -34,6 +45,7 @@
     width: 20px;
     height: 20px;
     pointer-events: none;
+    flex-grow: 1;
 }
 .contact-us-btn {
     background-color: #28a745; /* Зелёный фон */
@@ -50,6 +62,32 @@
 }
 .contact-us-btn:hover {
     background-color: #218838; /* Тёмный зелёный при наведении */
+}
+
+.custom-select {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3e%3cpath fill='none' stroke='%2328a745' stroke-width='2' d='M1 1l4 4 4-4'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 10px 7px;
+    transition: border-color 0.3s ease;
+}
+
+.custom-select:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
 }
 
 /*
