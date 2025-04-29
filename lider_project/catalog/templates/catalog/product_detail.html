@@ -1,13 +1,15 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-    <div class="search-bar-container">
+    {% include "core/request.html" with dialog_id="mydialog" %}
+    {% load custom_filters %}
+<!--    <div class="search-bar-container">
         <div class="search-input-wrapper">
             <input type="text" placeholder="Поиск по сайту">
             <img src="" alt="Search Icon" class="search-icon">
         </div>
         <button class="contact-us-btn">Связаться с нами</button>
-    </div>
+    </div>-->
 
     <div class="breadcrumb">
         <div class="container">
@@ -54,16 +56,13 @@
                     <div class="product-characteristics">
                         <h3>Характеристики</h3>
                         <ul>
-                        {% for attribute in attributes %}
-                            <li>
-                                <strong>{{ attribute.attribute_name }}:</strong>
-                                {% for attr_val in attribute_values %}
-                                    {% if attr_val.attribute.id == attribute.id %}
-                                        {{ attr_val.value }}
+                            {% for attribute in attributes %}
+                                {% with values=attribute_values|get_attribute_values:attribute %}
+                                    {% if values %}
+                                        <li>{{ attribute.attribute_name  }}: {{ values|join:", " }}</li>
                                     {% endif %}
-                                {% endfor %}
-                            </li>
-                        {% endfor %}
+                                {% endwith %}
+                            {% endfor %}
                         </ul>
                     </div>
                     <div class="product-price">
@@ -72,8 +71,9 @@
                             <p class="discount">до 1000 ₽ / 90%</p>
                         </div>
                         <div class="product-actions">
-                            <button class="request-btn">Оставить заявку</button>
-                            <button class="call-btn">Позвонить</button>
+                            <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                                Оставить заявку
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -85,13 +85,40 @@
         <div class="container">
             <h2>Похожие товары</h2>
             <div class="catalog-list">
-                {% for item in related_products %}
+                {% for product in alt_products %}
+                    <a href="{% url 'product_detail' category_id=category.id product_id=product.id %}" class="catalog-item-link"    >
                     <div class="catalog-item">
-                        <img src="" alt="Item title">
-                        <h3>ITEM TITLE</h3>
-                        <p>Краткое описание</p>
-                        <p class="item-price">от <!--{{ item.price }}--> ₽ / м²</p>
+                        {% with product.images.all|first as main_image %}
+                            {% if main_image %}
+                                <img src="{{ main_image.image_url }}"
+                                     alt="{{ main_image.alternative_text|default:product.product_name }}">
+                            {% else %}
+                                <div class="no-image">Нет фото</div>
+                            {% endif %}
+                        {% endwith %}
+
+                        <h3 class="product-title">{{ product.product_name }}</h3>
+
+                        <!-- Обрезаем длинное описание -->
+                        <p class="product-description">
+                            {{ product.description|truncatechars:100 }}
+                        </p>
+
+                        <!-- Форматируем цену и добавляем проверку -->
+                        <p class="item-price">
+                            {% if product.cost %}
+                                от {{ product.cost|floatformat:"0" }} ₽/м²
+                            {% else %}
+                                Цена по запросу
+                            {% endif %}
+                        </p>
+
+
+
                     </div>
+                {% empty %}
+                    <div class="no-products">Товары не найдены</div>
+                    </a>
                 {% endfor %}
             </div>
         </div>

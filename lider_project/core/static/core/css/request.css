@@ -1,0 +1,144 @@
+/* Основные стили модального окна */
+.modal-content {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  margin-bottom: 20px;
+  border-bottom: none;
+}
+
+.modal-header-content {
+  width: 100%;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.modal-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 0;
+}
+
+.modal-header p {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.modal-body {
+    padding: 0;
+}
+
+/* Стили для полей формы */
+.modal-body input,
+.modal-body textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.modal-body input:focus,
+.modal-body textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.modal-body textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Стили для кнопок */
+.modal-footer {
+    border-top: none;
+    padding: 20px 0 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-primary:hover {
+    background-color: #218838;
+    border-color: #218838;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* Сообщения об успехе и ошибках */
+.messages {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.messages .success {
+    color: #28a745;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.form-errors {
+    margin-bottom: 15px;
+}
+
+.form-errors ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 576px) {
+    .modal-content {
+        padding: 20px;
+    }
+
+    .modal-title {
+        font-size: 20px;
+    }
+
+    .btn {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}

@@ -1,6 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
 {% block content %}
+{% include "core/request.html" with dialog_id="mydialog" %}
     <section id="hero" class="hero" style="background: url('{% static 'core/img/Inst_servis.webp' %}') no-repeat center/cover;">
         <div class="hero-content">
             <h1>Надёжный партнёр для вашего бизнеса</h1>
@@ -69,19 +70,25 @@
                     <img src="{% static 'core/img/inst_servis.webp'%}" alt="Монтаж сэндвич-панелей">
                     <h3>Монтаж сэндвич-панелей</h3>
                     <p>Точный и надёжный монтаж сэндвич-панелей для любых объектов.</p>
-                    <a href="{% url 'index' %}#contact"><button class="service-btn">Оставить заявку</button></a>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
                 </div>
                 <div class="service-item">
                     <img src="{% static 'core/img/make_metal_const.png'%}" alt="Изготовление металлоконструкций">
                     <h3>Изготовление металлоконструкций</h3>
                     <p>Качественные металлоконструкции для различных строительных проектов.</p>
-                    <a href="{% url 'index' %}#contact"><button class="service-btn">Оставить заявку</button></a>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
                 </div>
                 <div class="service-item">
                     <img src="{% static 'core/img/Instll_met_constr.png'%}" alt="Монтаж металлоконструкций">
                     <h3>Монтаж металлоконструкций</h3>
                     <p>Безопасный и профессиональный монтаж металлоконструкций любой сложности.</p>
-                    <a href="{% url 'index' %}#contact"><button class="service-btn">Оставить заявку</button></a>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
                 </div>
             </div>
         </div>
@@ -97,7 +104,9 @@
                     </div>
                     <h3>Заявка</h3>
                     <p>Вы оставляете заявку на нашем сайте или через телефон.</p>
-                    <a href="{% url 'index' %}#contact"><button class="service-btn">Оставить заявку</button></a>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
                 </div>
                 <div class="step">
                     <div class="step-icon">
@@ -105,7 +114,9 @@
                     </div>
                     <h3>Бесплатная консультация</h3>
                     <p>Наши специалисты обрабатывают заявку и связываются с вами для уточнения деталей.</p>
-                    <a href="{% url 'index' %}#contact"><button class="service-btn">Оставить заявку</button></a>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
                 </div>
                 <div class="step">
                     <div class="step-icon">
@@ -113,7 +124,9 @@
                     </div>
                     <h3>Проектирование и расчёт</h3>
                     <p>Наши конструкторы бесплатно подготовят для вас расчёты панелей для согласования окончательной стоимости.</p>
-                    <a href="{% url 'index' %}#contact"><button class="service-btn">Оставить заявку</button></a>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
                 </div>
                 <div class="step">
                     <div class="step-icon">
@@ -121,7 +134,9 @@
                     </div>
                     <h3>Договор и оплата</h3>
                     <p>Согласовываем смету, заключаем договор на производство, поставку и монтаж материалов (при необходимости).</p>
-                    <a href="{% url 'index' %}#contact"><button class="service-btn">Оставить заявку</button></a>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
                 </div>
                 <div class="step">
                     <div class="step-icon">
@@ -129,7 +144,9 @@
                     </div>
                     <h3>Производство и доставка</h3>
                     <p>Производим необходимые материалы от 1 недели с момента подписания договора, отгружаем на ваш объект в согласованные сроки.</p>
-                    <a href="{% url 'index' %}#contact"><button class="service-btn">Оставить заявку</button></a>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
                 </div>
                 <div class="step">
                     <div class="step-icon">
@@ -137,7 +154,9 @@
                     </div>
                     <h3>Монтаж и сдача</h3>
                     <p>При заказе монтажных работ наша бригада выполнит всё работы по монтажу и сдаст вам готовый объект.</p>
-                    <a href="{% url 'index' %}#contact"><button class="service-btn">Оставить заявку</button></a>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
                 </div>
             </div>
         </div>
@@ -215,7 +234,6 @@
             </div>
         </div>
     </section>
-
 {% endblock %}
 
 

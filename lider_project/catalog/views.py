@@ -62,9 +62,12 @@ def product_detail(request, category_id, product_id):
     attributes = Attribute.objects.filter(category=category)
     attribute_values = AttributeValue.objects.filter(product=product)
 
+    alternative_products = Product.objects.all().order_by('?')[:4]
+
     return render(request, 'catalog/product_detail.html', {
         'category' :  category,
         'product': product,
+        'alt_products' : alternative_products,
         'images': images,
         'attributes': attributes,
         'attribute_values': attribute_values,

@@ -65,7 +65,7 @@
 }
 
 .custom-select {
-    width: 100%;
+/*    width: 100%;*/
     max-width: 500px;
     padding: 10px 15px;
     border: 1px solid #ddd;
@@ -89,6 +89,7 @@
     border-color: #28a745;
     box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
 }
+
 
 /*
 .search-input-wrapper input {

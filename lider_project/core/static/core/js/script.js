@@ -64,3 +64,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.location.pathname === "/request/") {
+    const hasErrors = /* логика с шаблона */;
+    const hasMessages = /* логика с шаблона */;
+
+    if (hasErrors || hasMessages) {
+      var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+      myModal.show();
+    }
+  }
+});
