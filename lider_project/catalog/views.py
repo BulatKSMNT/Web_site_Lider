@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.utils.http import urlencode
@@ -5,6 +6,10 @@ from django.utils.http import urlencode
 from catalog.models import Category, Product, ProductImages, Attribute, AttributeValue
 
 from catalog.forms import SearchForm, CategoryFilterForm
+
+from core.forms import RequestForm
+
+from core.models import Request
 
 
 def category_list(request):
@@ -64,7 +69,19 @@ def product_detail(request, category_id, product_id):
 
     alternative_products = Product.objects.all().order_by('?')[:4]
 
+    form = RequestForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        Request.objects.create(
+            fullname=form.cleaned_data['fullname'],
+            phone_number=form.cleaned_data['phone_number'],
+            email=form.cleaned_data['email'],
+            description=form.cleaned_data['description']
+        )
+        messages.success(request, "Заявка успешно отправлена! Мы свяжемся с вами.")
+        return redirect(request.path)
+
     return render(request, 'catalog/product_detail.html', {
+        'form' : form,
         'category' :  category,
         'product': product,
         'alt_products' : alternative_products,
