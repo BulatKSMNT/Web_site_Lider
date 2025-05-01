@@ -6,5 +6,6 @@ from .models import Request
 
 @admin.register(Request)
 class RequestAdmin(admin.ModelAdmin):
-    list_display = ('fullname','phone_number','email')
-    list_filter = ('fullname','phone_number')
+    list_display = ('created_at','status','fullname','phone_number','email')
+    list_filter = ('status','created_at')
+    search_fields = ('created_at','fullname')
