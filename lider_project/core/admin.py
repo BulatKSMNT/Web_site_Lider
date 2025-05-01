@@ -1,7 +1,10 @@
 from django.contrib import admin
 
-from core.models import Request
+from .models import Request
 
 # Register your models here.
 
-admin.site.register(Request)
+@admin.register(Request)
+class RequestAdmin(admin.ModelAdmin):
+    list_display = ('fullname','phone_number','email')
+    list_filter = ('fullname','phone_number')
