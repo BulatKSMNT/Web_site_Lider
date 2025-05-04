@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}?v=1.0">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'catalog/js/catalog.js' %}?v=1.0"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="search-bar-container">
+        <div class="search-input-wrapper">
+            <form method="get" action="">
+                <input type="text" name="search" placeholder="Поиск по категориям" value="{{ form.search.value|default_if_none:'' }}">
+                <button type="submit" class="contact-us-btn">Найти</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="/">Главная</a>
+            <span> / </span>
+            <a href="/catalog">Каталог</a>
+        </div>
+    </div>
+
+    <section id="catalog" class="catalog-list">
+        <div class="container">
+            <h2>Категории товаров</h2>
+            <p class="catalog-description">Мы создаём изделия, которые соответствуют в себе высокое качество, надёжность и инновационные требования.</p>
+            <div class="catalog-grid">
+            {% for category in categories %}
+                <a href="{% url 'product_list' category.id %}" class="catalog-item-link">
+                    <div class="catalog-item">
+                        <div class="catalog-item-img-container">
+                            <img src="{{ category.image_url }}"
+                                 alt="{{ category.category_name }}"
+                                 class="catalog-item-img"
+                                 loading="lazy">
+                        </div>
+                        <div class="catalog-item-content">
+                            <h3 class="catalog-item-title">{{ category.category_name }}</h3>
+                            <p class="catalog-item-desc">
+                                {{ category.description|truncatechars:100 }}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            {% empty %}
+                <div class="catalog-empty">
+                    <p>Категории не найдены</p>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
