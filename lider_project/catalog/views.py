@@ -67,7 +67,12 @@ def product_detail(request, category_id, product_id):
     attributes = Attribute.objects.filter(category=category)
     attribute_values = AttributeValue.objects.filter(product=product)
 
-    alternative_products = Product.objects.all().order_by('?')[:4]
+    alternative_products = (
+        Product.objects
+        .filter(category=category_id)
+        .exclude(id=product_id)  # Исключаем текущий товар
+        .order_by('?')[:4]              # Случайная сортировка и лимит 4
+    )
 
     form = RequestForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
