@@ -166,20 +166,15 @@
             <h2>Отзывы наших клиентов</h2>
             <div class="review-container">
                 <div class="review-slider">
+                    {% for review in reviews %}
                     <div class="review-card">
-                        <p class="author">Иван Петров</p>
-                        <p>Сотрудничество с LIDER стало для нас настоящим прорывом. Их профессионализм и подход к делу впечатляют!</p>
+                        <p class="review-text">{{ review.text }}</p>
+                        <div class="sentiment-badge {% if review.sentiment == 'positive' %}positive{% elif review.sentiment == 'negative' %}negative{% else %}neutral{% endif %}">
+                            {{ review.sentiment|upper }}
+                        </div>
                     </div>
-                    <div class="review-card">
-                        <p class="author">Мария Иванова</p>
-                        <p>Спасибо за оперативность и качество работы. Теперь мы уверены в завтрашнем дне нашего бизнеса.</p>
-                    </div>
-                    <div class="review-card">
-                        <p class="author">Алексей Сидоров</p>
-                        <p>Лучшая компания, с которой нам приходилось работать. Рекомендуем всем!</p>
-                    </div>
+                    {% endfor %}
                 </div>
-                <button class="load-more-btn">›</button>
             </div>
         </div>
     </section>
@@ -233,6 +228,26 @@
             </div>
         </div>
     </section>
+
+<section id="add-review" class="add-review-section">
+    <div class="container">
+        <h2>Оставьте ваш отзыв</h2>
+        <div class="review-form-wrapper">
+            <form method="post" action="{% url 'add_review' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea
+                        name="text"
+                        class="form-textarea"
+                        placeholder="Напишите ваш отзыв здесь..."
+                        required
+                    ></textarea>
+                </div>
+                <button type="submit" class="btn btn-submit">Отправить отзыв</button>
+            </form>
+        </div>
+    </div>
+</section>
 {% endblock %}
 
 
