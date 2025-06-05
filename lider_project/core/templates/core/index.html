@@ -1,0 +1,256 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+    <section id="hero" class="hero" style="background: url('{% static 'core/img/Inst_servis.webp' %}') no-repeat center/cover;">
+        <div class="hero-content">
+            <h1>Надёжный партнёр для вашего бизнеса</h1>
+            <p>Мы поможем вам достичь новых высот</p>
+            <a href="#contact" class="btn">Связаться с нами</a>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>О нас</h2>
+            <div class="content">
+                <div class="text">
+                    <p>Мы - команда профессионалов, которые стремятся к тому, чтобы ваш бизнес процветал. Наша компания предоставляет полный спектр услуг, направленных на развитие и поддержку вашего дела.</p>
+                    <p>С нами вы получите не только качественное обслуживание, но и надёжного партнёра, готового помочь в любой ситуации. Наш опыт и индивидуальный подход позволяют нам находить лучшие решения для каждого клиента.</p>
+                    <p>Мы работаем с 2015 года и за это время помогли более 100 компаниям достичь своих целей. Наша миссия — сделать ваш бизнес успешным, а сотрудничество с нами — комфортным и продуктивным.</p>
+                </div>
+                <img src="static\core\img\Instll_met_constr.png" alt="О нас">
+            </div>
+        </div>
+    </section>
+
+    <section id="catalog" class="catalog">
+        <div class="container">
+            <h2 class="catalog-title">Каталог</h2>
+
+            <div class="catalog-grid">
+                {% for category in categories %}
+                    <a href="{% url 'product_list' category.id %}" class="catalog-item-link">
+                            <div class="catalog-item">
+                                <div class="catalog-item-img-container">
+                                    <img src="{{ category.image_url }}"
+                                         alt="{{ category.category_name }}"
+                                         class="catalog-item-img"
+                                         loading="lazy">
+                                </div>
+                                <div class="catalog-item-content">
+                                    <h3 class="catalog-item-title">{{ category.category_name }}</h3>
+                                    <p class="catalog-item-desc">
+                                        {{ category.description|truncatechars:100 }}
+                                    </p>
+                                </div>
+                            </div>
+                    </a>
+                {% empty %}
+                    <div class="catalog-empty">
+                        <p>Категории временно отсутствуют</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% if categories|length >= 4 %}
+            <div class="catalog-more">
+                <a href="{% url 'category_list' %}"><button class="catalog-more-btn">Другие категории</button></a>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Услуги, которые мы предоставляем</h2>
+            <p class="services-description">Мы специализируемся на проектировании, изготовлении и монтаже металлоконструкций, адаптированных к различным потребностям и применению проектов. Наша команда инженеров поможет успешно начать с разработки проектов и заканчивая производством и установкой, гарантируя высокое качество и точность металлоконструкций любого типа для любых разнообразных объектов, без каких-либо дополнительных проблем.</p>
+            <div class="services-grid">
+                <div class="service-item">
+                    <img src="{% static 'core/img/inst_servis.webp'%}" alt="Монтаж сэндвич-панелей">
+                    <h3>Монтаж сэндвич-панелей</h3>
+                    <p>Точный и надёжный монтаж сэндвич-панелей для любых объектов.</p>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
+                </div>
+                <div class="service-item">
+                    <img src="{% static 'core/img/make_metal_const.png'%}" alt="Изготовление металлоконструкций">
+                    <h3>Изготовление металлоконструкций</h3>
+                    <p>Качественные металлоконструкции для различных строительных проектов.</p>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
+                </div>
+                <div class="service-item">
+                    <img src="{% static 'core/img/Instll_met_constr.png'%}" alt="Монтаж металлоконструкций">
+                    <h3>Монтаж металлоконструкций</h3>
+                    <p>Безопасный и профессиональный монтаж металлоконструкций любой сложности.</p>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="work-steps">
+        <div class="container">
+            <h2>Порядок работы</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">
+                        <img src="{% static 'core/img/_1_.svg'%}" alt="Иконка заявки">
+                    </div>
+                    <h3>Заявка</h3>
+                    <p>Вы оставляете заявку на нашем сайте или через телефон.</p>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <img src="{% static 'core/img/_2_.svg'%}" alt="Иконка консультации">
+                    </div>
+                    <h3>Бесплатная консультация</h3>
+                    <p>Наши специалисты обрабатывают заявку и связываются с вами для уточнения деталей.</p>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <img src="{% static 'core/img/_3_.svg'%}" alt="Иконка проекта">
+                    </div>
+                    <h3>Проектирование и расчёт</h3>
+                    <p>Наши конструкторы бесплатно подготовят для вас расчёты панелей для согласования окончательной стоимости.</p>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <img src="{% static 'core/img/_4_.svg'%}" alt="Иконка договора">
+                    </div>
+                    <h3>Договор и оплата</h3>
+                    <p>Согласовываем смету, заключаем договор на производство, поставку и монтаж материалов (при необходимости).</p>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <img src="{% static 'core/img/_5_.svg'%}" alt="Иконка производства">
+                    </div>
+                    <h3>Производство и доставка</h3>
+                    <p>Производим необходимые материалы от 1 недели с момента подписания договора, отгружаем на ваш объект в согласованные сроки.</p>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <img src="{% static 'core/img/_6_.svg'%}" alt="Иконка монтажа">
+                    </div>
+                    <h3>Монтаж и сдача</h3>
+                    <p>При заказе монтажных работ наша бригада выполнит всё работы по монтажу и сдаст вам готовый объект.</p>
+                    <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Оставить заявку
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <h2>Отзывы наших клиентов</h2>
+            <div class="review-container">
+                <div class="review-slider">
+                    {% for review in reviews %}
+                    <div class="review-card">
+                        <p class="review-text">{{ review.text }}</p>
+                        <div class="sentiment-badge {% if review.sentiment == 'positive' %}positive{% elif review.sentiment == 'negative' %}negative{% else %}neutral{% endif %}">
+                            {{ review.sentiment|upper }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-left">
+                    <img src="{% static 'core/img/DeWatermarkai_174342.webp'%}" alt="Контакты">
+                    <div class="contact-info">
+                        <h2>Контакты</h2>
+                        <p>Email: <a href="mailto:info@zsplider.ru">mail@mail.ru</a></p>
+                        <p>Телефон: <a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
+                        <p>Адрес: г. Москва, ул. Примерная, д. 123</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h2>Оставьте заявку, и мы поможем рассчитать стоимость вашего проекта</h2>
+                    <p>Оставьте свои контактные данные, наш менеджер свяжется с вами для расчета стоимости вашего проекта</p>
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="fullname" placeholder="Ваше ФИО" value="{{ form.fullname.value|default_if_none:'' }}" required>
+                        <input type="email" name="email" placeholder="Ваш email (post@example.ru)" value="{{ form.email.value|default_if_none:'' }}" required>
+                        <input type="tel" name="phone_number" placeholder="Ваш телефон" value="{{ form.phone_number.value|default_if_none:'' }}" required>
+                        <textarea name="description" placeholder="Ваше сообщение">{{ form.description.value|default_if_none:'' }}</textarea>
+
+                        {% if form.errors %}
+                            <div class="form-errors" style="color: red;">
+                                <ul>
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        <button type="submit">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="add-review" class="add-review-section">
+    <div class="container">
+        <h2>Оставьте ваш отзыв</h2>
+        <div class="review-form-wrapper">
+            <form method="post" action="{% url 'add_review' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea
+                        name="text"
+                        class="form-textarea"
+                        placeholder="Напишите ваш отзыв здесь..."
+                        required
+                    ></textarea>
+                </div>
+                <button type="submit" class="btn btn-submit">Отправить отзыв</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,54 @@
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'core/css/request.css' %}">
+{% endblock %}
+{% block extra_js %}
+  <script src="{% static 'core/js/request.js' %}?v=1.0"></script>
+{% endblock %}
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form method="post" class="modal-content">
+      {% csrf_token %}
+      <div class="modal-header">
+        <div class="modal-header-content">
+          <h5 class="modal-title">Оставьте заявку, и мы поможем рассчитать стоимость вашего проекта</h5>
+          <p class="modal-subtitle">Оставьте свои контактные данные, наш менеджер свяжется с вами для расчета стоимости вашего проекта</p>
+        </div>
+      </div>
+      <div class="modal-body">
+        {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <input type="text" name="fullname" placeholder="Ваше ФИО" value="{{ form.fullname.value|default_if_none:'' }}" required>
+        <input type="email" name="email" placeholder="Ваш email (post@example.ru)" value="{{ form.email.value|default_if_none:'' }}" required>
+        <input type="tel" name="phone_number" placeholder="Ваш телефон" value="{{ form.phone_number.value|default_if_none:'' }}" required>
+        <textarea name="description" placeholder="Ваше сообщение">{{ form.description.value|default_if_none:'' }}</textarea>
+
+        {% if form.errors %}
+          <div class="form-errors" style="color: red;">
+            <ul>
+              {% for field in form %}
+                {% for error in field.errors %}
+                  <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+                {% endfor %}
+              {% endfor %}
+              {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Отправить</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </form>
+  </div>
+</div>

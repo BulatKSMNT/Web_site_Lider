@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>Все отзывы</h1>
+    <div class="review-list">
+        {% for review in reviews %}
+        <div class="review-item">
+            <p class="review-text">{{ review.text }}</p>
+            <div class="sentiment {{ review.sentiment }}">
+                {{ review.sentiment|upper }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'add_review' %}" class="btn">Оставить новый отзыв</a>
+</div>
+{% endblock %}

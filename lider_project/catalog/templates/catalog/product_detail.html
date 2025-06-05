@@ -1,0 +1,121 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    {% load custom_filters %}
+<!--    <div class="search-bar-container">
+        <div class="search-input-wrapper">
+            <input type="text" placeholder="Поиск по сайту">
+            <img src="" alt="Search Icon" class="search-icon">
+        </div>
+        <button class="contact-us-btn">Связаться с нами</button>
+    </div>-->
+
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="/">Главная</a>
+            <span> / </span>
+            <a href="/catalog">Каталог</a>
+          <span> / </span>
+            <a href="/catalog/category/{{ category.id }}">{{category.category_name}}</a>
+            <span> / </span>
+            <a href="/catalog/category/{{ category.id }}/product/{{product.id}}">{{product.product_name}}</a>
+        </div>
+    </div>
+
+    <section id="product" class="product-details">
+        <div class="container">
+            <div class="product-content">
+                <div class="product-image">
+                    {% if product.images.all %}
+                        <div id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for image in product.images.all %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <img src="{{ image.image_url }}" class="d-block w-100" alt="{{ image.alternative_text }}">
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            {% if product.images.count > 1 %}
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ product.id }}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="product-info">
+                    <h1>{{product.product_name}}</h1>
+                    <p>{{product.description}}</p>
+                    <div class="product-characteristics">
+                        <h3>Характеристики</h3>
+                        <ul>
+                            {% for attribute in attributes %}
+                                {% with values=attribute_values|get_attribute_values:attribute %}
+                                    {% if values %}
+                                        <li>{{ attribute.attribute_name  }}: {{ values|join:", " }}</li>
+                                    {% endif %}
+                                {% endwith %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="product-price">
+                        <div class="price-details">
+                            <p class="price">от {{product.cost}} ₽ / м²</p>
+                            <p class="discount">до 1000 ₽ / 90%</p>
+                        </div>
+                        <div class="product-actions">
+                            <button type="button" class="service-btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                                Оставить заявку
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="related-products" class="related-products">
+        <div class="container">
+            <h2>Похожие товары</h2>
+            <div class="catalog-list">
+                {% for product in alt_products %}
+                    <a href="{% url 'product_detail' category_id=category.id product_id=product.id %}" class="catalog-item-link"    >
+                    <div class="catalog-item">
+                        {% with product.images.all|first as main_image %}
+                            {% if main_image %}
+                                <img src="{{ main_image.image_url }}"
+                                     alt="{{ main_image.alternative_text|default:product.product_name }}">
+                            {% else %}
+                                <div class="no-image">Нет фото</div>
+                            {% endif %}
+                        {% endwith %}
+
+                        <h3 class="product-title">{{ product.product_name }}</h3>
+
+                        <p class="product-description">
+                            {{ product.description|truncatechars:100 }}
+                        </p>
+
+                        <p class="item-price">
+                            {% if product.cost %}
+                                от {{ product.cost|floatformat:"0" }} ₽/м²
+                            {% else %}
+                                Цена по запросу
+                            {% endif %}
+                        </p>
+
+                    </div>
+                {% empty %}
+                    <div class="no-products">Товары не найдены</div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
