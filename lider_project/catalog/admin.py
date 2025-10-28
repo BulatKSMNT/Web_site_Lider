@@ -33,7 +33,7 @@ class AttributeValueInline(admin.TabularInline):
 class ProductImagesInline(admin.TabularInline):
     model = ProductImages
     extra = 1
-    fields = ('image_url', 'image_preview', 'alternative_text')
+    fields = ('public_yandex_link', 'image_preview', 'alternative_text')
     readonly_fields = ('image_preview',)
 
     def image_preview(self, obj):
@@ -94,6 +94,9 @@ class ProductImagesAdmin(admin.ModelAdmin):
     search_fields = ('product__product_name', 'alternative_text')
     list_filter = ('product__category',)
     raw_id_fields = ('product',)
+    readonly_fields = ('image_preview',)  # image_url не редактируем вручную
+
+    fields = ('product', 'public_yandex_link', 'alternative_text', 'image_preview')
 
     def image_preview(self, obj):
         if obj.image_url:

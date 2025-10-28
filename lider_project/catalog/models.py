@@ -1,4 +1,5 @@
 from django.db import models
+import requests
 
 class Category(models.Model):
     category_name = models.CharField(max_length=255, verbose_name="Название категории")
@@ -35,8 +36,8 @@ class Attribute(models.Model):
         return self.attribute_name
 
     class Meta:
-        verbose_name = "Атрибут"
-        verbose_name_plural = "Атрибуты"
+        verbose_name = "Характеристика"
+        verbose_name_plural = "Характеристики"
 
 
 class AttributeValue(models.Model):
@@ -54,12 +55,39 @@ class AttributeValue(models.Model):
 
 class ProductImages(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Продукт", related_name='images')
-    image_url = models.URLField(verbose_name="Изображение")
+    public_yandex_link = models.URLField(
+        verbose_name="Публичная ссылка (Яндекс.Диск)",
+        blank=True,
+        help_text="Вставьте публичную ссылку Яндекс.Диска, например https://disk.yandex.ru/i/..."
+    )
+    image_url = models.URLField(
+        verbose_name="Прямая ссылка на изображение (заполняется автоматически)",
+        blank=True,
+        editable=False
+    )
     alternative_text = models.CharField(max_length=255, verbose_name="Альтернативный текст")
 
+    def save(self, *args, **kwargs):
+        if self.public_yandex_link:
+            direct_url = self.get_direct_link_from_public()
+            if direct_url:
+                self.image_url = direct_url
+        super().save(*args, **kwargs)
+
+    def get_direct_link_from_public(self):
+        api_url = "https://cloud-api.yandex.net/v1/disk/public/resources/download"
+        params = {"public_key": self.public_yandex_link}
+        try:
+            response = requests.get(api_url, params=params, timeout=5)
+            if response.status_code == 200:
+                return response.json().get("href")
+        except Exception:
+            pass
+        return None
+
     def __str__(self):
-        return self.alternative_text
+        return self.alternative_text or "Изображение"
 
     class Meta:
-        verbose_name = "Изображение продукта"
-        verbose_name_plural = "Изображения продуктов"
+        verbose_name = "Изображение продукции"
+        verbose_name_plural = "Изображения продукции"
